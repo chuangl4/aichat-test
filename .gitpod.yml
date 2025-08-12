@@ -1,0 +1,18 @@
+image: gitpod/workspace-full:latest
+
+ports:
+  - port: 11434   # Ollama
+    onOpen: ignore
+    visibility: private
+
+tasks:
+  - name: setup
+    init: bash .gp/setup.sh
+  - name: shell
+    command: bash -lc 'source ~/.bashrc && echo "AIChat ready. Try: ash \"find biggest files\""'  # starts interactive terminal
+
+vscode:
+  extensions:
+    - ms-python.python
+    - ms-python.vscode-pylance
+
