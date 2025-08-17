@@ -19,8 +19,7 @@ ollama pull phi3:instruct
 # --- AIChat ---
 # Prefer single-file binary install
 if ! command -v aichat >/dev/null 2>&1; then
-  curl -L https://github.com/sigoden/aichat/releases/latest/download/aichat-x86_64-unknown-linux-gnu.tar.gz \
-    -o /tmp/aichat.tgz
+  curl -fLo /tmp/aichat.tgz https://github.com/sigoden/aichat/releases/download/v0.30.0/aichat-v0.30.0-x86_64-unknown-linux-musl.tar.gz
   sudo tar -xzf /tmp/aichat.tgz -C /usr/local/bin aichat
   rm -f /tmp/aichat.tgz
 fi
