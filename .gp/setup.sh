@@ -27,35 +27,15 @@ fi
 # AIChat config
 mkdir -p ~/.config/aichat
 cat > ~/.config/aichat/config.yaml <<'YAML'
-# Make Ollama the default provider/model
-default_provider: ollama
-default_model: phi3:instruct
-providers:
-  ollama:
-    type: ollama
-    api_base: http://localhost:11434
-
-# A strict system prompt for shell command synthesis
-profiles:
-  cmdgen:
-    system: |
-      You are a command generator. Output exactly ONE safe shell command on the first line.
-      On the second line, start with '# ' and briefly explain.
-      If destructive, propose a dry-run or safer alternative.
-      Use portable POSIX tools when possible.
-    options:
-      temperature: 0.2
-
-# Optional quick templates
-prompts:
-  largest:
-    description: list N largest files under path
-    content: |
-      list the {{n|10}} largest files under {{path|.}} as a single shell command
-  recent-logs:
-    description: tar recent .log files
-    content: |
-      find .log files modified in the last {{days|2}} days and tar.gz them as one archive
+model: ollama:phi3:instruct
+clients:
+  - type: openai-compatible
+    name: ollama
+    api_base: http://localhost:11434/v1
+    models:
+      - name: phi3:instruct
+        max_input_tokens: 128000 # Example, adjust as needed based on phi3:instruct documentation
+        supports_reasoning: true
 YAML
 
 # Few helpful aliases and shell integration
